@@ -1,0 +1,42 @@
+GET http://localhost:5000/myJobs/test@gmail.com
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAZ21haWwuY29tIiwiaWQiOiI2NWJiZTFiYWY2YzliNzJkMzZhNWE5M2UiLCJpYXQiOjE3MDY4MTM2NDIsImV4cCI6MTcwNzQxODQ0Mn0.wxSdV-L94Z1vELDzPERmnkzrTiEcJqOvK3xOi7Ghlfs
+
+###
+GET http://localhost:5000
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAZ21haWwuY29tIiwiaWQiOiI2NWJiZTFiYWY2YzliNzJkMzZhNWE5M2UiLCJpYXQiOjE3MDY4MTIwMTEsImV4cCI6MTcwNzQxNjgxMX0.xhLSh6JaPU6wUV2wFKbVzJeogxbi-JJ0yNc3uoLEJ7M
+###
+POST http://localhost:5000/api/users
+Content-Type: application/json
+
+{
+  "firstName": "Roshan",
+  "lastName": "Birgonda",
+  "email": "roshanbirgonda@gmail.com",
+  "password": "Test@123",
+  "role": "seeker"
+}
+
+###
+
+GET http://localhost:5000/all-jobs
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAZ21haWwuY29tIiwiaWQiOiI2NWJiZTFiYWY2YzliNzJkMzZhNWE5M2UiLCJpYXQiOjE3MDY4MTM2NDIsImV4cCI6MTcwNzQxODQ0Mn0.wxSdV-L94Z1vELDzPERmnkzrTiEcJqOvK3xOi7Ghlfs
+
+###
+
+POST  http://localhost:5000/api/auth
+Content-Type: application/json
+
+{
+  "email": "test@gmail.com",
+  "password": "Test@123"
+}
+
+
+
+### 
+DELETE http://localhost:5000/job/65bbe8e5cc1c2dc3f1b48c64
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3RAZ21haWwuY29tIiwiaWQiOiI2NWJiZTFiYWY2YzliNzJkMzZhNWE5M2UiLCJpYXQiOjE3MDY4MTM2NDIsImV4cCI6MTcwNzQxODQ0Mn0.wxSdV-L94Z1vELDzPERmnkzrTiEcJqOvK3xOi7Ghlfs
+
+
+###
+GET http://localhost:5000/all-jobs
