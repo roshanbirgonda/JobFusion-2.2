@@ -14,7 +14,7 @@ const jobSchema = new mongoose.Schema({
   employmentType: { type: String, required: true },
   description: { type: String, required: true },
   postedBy: { type: String, required: true },
-  recruiterId: { type: mongoose.Schema.Types.ObjectId, ref: "recruiters" },
+  AppliedUsers: [{ type: mongoose.Schema.Types.ObjectId, ref: "recruiters" }],
 });
 
 const Job = mongoose.model("Job", jobSchema);

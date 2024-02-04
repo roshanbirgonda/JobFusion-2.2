@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 
+// This is a comment for timepass!!
 function verifyToken(req, res, next) {
   // console.log(req.headers.authorization);
   const token = req.headers.authorization.split(" ")[1];
@@ -10,9 +11,9 @@ function verifyToken(req, res, next) {
 
   console.log("Verify Token Invoked!!");
   const decoded = jwt.verify(token, "impossible");
-  // console.log(decoded);
-  req.user = decoded;
+  console.log(decoded);
 
+  req.user = decoded;
   next();
 }
 module.exports = verifyToken;

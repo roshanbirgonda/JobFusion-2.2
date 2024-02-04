@@ -28,19 +28,10 @@ router.post("/", async (req, res) => {
     const recruiterData = await Recruiter.findOne({ email });
 
     const user = seekerData || recruiterData;
-    // console.log(user);
-    // console.log("From recruiter sside!!");
-    // console.log(recruiterData);
-    //  const role = recruiterData ? recruiterData.role : seekerData.role;
 
     if (!user) {
       return res.status(401).send({ message: "Invalid Email" });
     }
-    // console.log("After finding email.")
-
-    // Make sure that the retrieved seekerData is an instance of the Seeker model
-    // const seeker = seekerData ? new Seeker(seekerData) : null;
-    // const recruiter = recruiterData ? new Recruiter(recruiterData) : null;
 
     const validPassword = await bcrypt.compare(password, user.password);
 

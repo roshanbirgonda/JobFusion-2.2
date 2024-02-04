@@ -8,9 +8,6 @@ const verifyToken = require("../utils/verify");
 // Posting a job
 router.post("/post-job", verifyToken, async (req, res) => {
   try {
-    // Validate the request body
-    //  return console.log(req.user);
-
     const { id } = req.user;
 
     const { error } = jobValidationSchema.validate(req.body);
@@ -18,9 +15,9 @@ router.post("/post-job", verifyToken, async (req, res) => {
       console.log({ message: error.details[0].message });
       return res.status(400).json({ message: error.details[0].message });
     }
-    //res.send(req.user);
+
     req.body.RecruiterId = id;
-    // Create a new job posting
+
     const job = new Job(req.body);
     const savedJob = await job.save();
 
@@ -42,25 +39,25 @@ router.get("/all-jobs", async (req, res) => {
   }
 });
 
-// Importing all jobs by id
-// router.get("/all-jobs/:id", async (req, res) => {
-//   const id = req.params.id;
-//   const job = await Job.findById(id);
-//   res.send(job);
-// });
+//Importing all jobs by id
+router.get("/all-jobs/:id", async (req, res) => {
+  const id = req.params.id;
+  const job = await Job.findById(id);
+  res.send(job);
+});
 
 // Importing jobs by email Recruiter side
 router.get("/myJobs/:email", verifyToken, async (req, res) => {
   console.log(req.params.email);
   const jobs = await Job.find({ postedBy: req.params.email });
-  // console.log(jobs);
+
   res.send(jobs);
 });
 
+// Recruiter posted jobs
 router.get("/jobs", verifyToken, async (req, res) => {
-  //console.log(req.params.email);
   const email = req.user.email;
-  // console.log(email);
+
   const jobs = await Job.find({ postedBy: email });
   //console.log(jobs);
   res.send(jobs);

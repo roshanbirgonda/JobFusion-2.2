@@ -21,9 +21,39 @@ const Shome = () => {
   //       setIsLoading(false);
   //     });
   // }, []);
-  useEffect(() => {
-    setIsLoading(true);
+  // useEffect(() => {
+  //   setIsLoading(true);
 
+  //   const token = localStorage.getItem("token");
+  //   const requestOptions = {
+  //     method: "GET",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       Authorization: `Bearer ${token}`,
+  //     },
+  //   };
+
+  //   fetchJobs = async () => {
+  //     fetch("http://localhost:5000/all-jobs", requestOptions)
+  //       .then((res) => res.json())
+  //       .then((data) => {
+  //         setJobs(data);
+  //         setIsLoading(false);
+  //       })
+  //       .catch((error) => {
+  //         console.error("Error fetching jobs:", error);
+  //         setIsLoading(false);
+  //       });
+  //   };
+  //   fetchJobs();
+
+  //   // Fetch jobs every 30 seconds
+  //   const intervalId = setInterval(fetchJobs, 10000);
+
+  //   // Cleanup function to clear the interval
+  //   return () => clearInterval(intervalId);
+  // }, []);
+  useEffect(() => {
     const token = localStorage.getItem("token");
     const requestOptions = {
       method: "GET",
@@ -33,18 +63,33 @@ const Shome = () => {
       },
     };
 
-    fetch("http://localhost:5000/all-jobs", requestOptions)
-      .then((res) => res.json())
-      .then((data) => {
+    const fetchJobs = async () => {
+      try {
+        const response = await fetch(
+          "http://localhost:5000/all-jobs",
+          requestOptions
+        );
+        if (!response.ok) {
+          throw new Error("Failed to fetch jobs");
+        }
+        const data = await response.json();
         setJobs(data);
         setIsLoading(false);
-      })
-      .catch((error) => {
+      } catch (error) {
         console.error("Error fetching jobs:", error);
         setIsLoading(false);
-      });
-  }, []);
+      }
+    };
 
+    // Fetch jobs initially
+    fetchJobs();
+
+    // Fetch jobs every 30 seconds
+    const intervalId = setInterval(fetchJobs, 3000);
+
+    // Cleanup function to clear the interval
+    return () => clearInterval(intervalId);
+  }, []);
   // console.log(jobs)
 
   const [query, setQuery] = useState("");

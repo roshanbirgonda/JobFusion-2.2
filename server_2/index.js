@@ -4,9 +4,11 @@ const mongoose = require("mongoose");
 const app = express();
 
 //routers
+const applyRouter = require("./routes/jobApply");
 const registerRouter = require("./routes/users");
 const loginRouter = require("./routes/login");
 const postJobRouter = require("./routes/jobPosting");
+const resumeRouter = require("./routes/resume");
 
 // Middlewares
 app.use(cors());
@@ -26,6 +28,8 @@ db.once("open", () => {
 app.use("/api/users", registerRouter);
 app.use("/api/auth", loginRouter);
 app.use("/", postJobRouter);
+app.use("/", resumeRouter);
+app.use("/api", applyRouter);
 
 // Setting up the server!!
 app.listen(5000, () => {
